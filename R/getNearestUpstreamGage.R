@@ -9,8 +9,11 @@
 #'
 #' @examples
 #' index <- getNearestUpstreamGage(23)
-#' index <- getNearestUpstreamGage(103, T)
+#' index <- getNearestUpstreamGage(103, TRUE)
 getNearestUpstreamGage <- function(riverMile, messages = F) {
+  # Load GageList dataset from the package
+  GrandCanyonSandbaR::GageList
+
   # Ensure the input is within the valid range
   if (riverMile < 0 || riverMile > 283) {
     stop("River mile must be between 0 and 283.")

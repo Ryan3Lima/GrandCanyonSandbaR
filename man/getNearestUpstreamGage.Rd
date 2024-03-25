@@ -19,5 +19,5 @@ function to find the nearest upstream gage in Grand Canyon to the desired riverm
 }
 \examples{
 index <- getNearestUpstreamGage(23)
-index <- getNearestUpstreamGage(103, T)
+index <- getNearestUpstreamGage(103, TRUE)
 }
