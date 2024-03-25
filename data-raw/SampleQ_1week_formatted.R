@@ -22,5 +22,5 @@ internal_Raw2FormattedQ <- function(Qdata, xcol_index = 4, DTcol_index = 3){
 
 SampleQ_1week_formatted <-internal_Raw2FormattedQ(SampleQ_1week_raw)
 
-usethis::use_data(SampleQ_1week_formatted)
+usethis::use_data(SampleQ_1week_formatted, overwrite = TRUE)
 

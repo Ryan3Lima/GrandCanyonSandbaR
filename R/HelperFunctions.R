@@ -70,7 +70,6 @@ convertQdataRaw2FormattedQ <- function(Qdata, xcol_index = 4, DTcol_index = 3){
 #'
 #' @return tibble or data.frame subset by startDT and endDT
 #' @export
-#'
 #' @examples
 #' Qdat_Subset<-subsetDatetime(SampleQ_1week_formatted,'20141003_0600', '20140109_1200')
 subsetDatetime <- function(formattedQ, startDT, endDT){
