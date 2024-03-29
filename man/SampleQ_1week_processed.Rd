@@ -12,6 +12,7 @@ A data frame with 168 observations on the following 3 variables:
 \item{\code{Discharge_cfs}}{Numeric streamflow data, measured in cubic feet per second (cfs).}
 \itme{\code{Discharge_cms}}{Numeric streamflow data, measured in cubic meters per second (cms)}
 }
+}
 \source{
 USGS National Water Information System
 }

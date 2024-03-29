@@ -87,7 +87,8 @@ subsetDatetime <- function(formattedQ, startDT, endDT){
 }
 
 #' Turn Formatted discharge data into an xts time-series object for plotting with dygraph
-#'
+#' @importFrom tibble tibble
+#' @importFrom xts xts
 #' @param formattedQ data.frame or tibble. formatted data (or subset and formatted data) output from convertQdataRaw2FormattedQ()
 #' @param unit string. default unit = 'cfs', can also be unit = 'cms'
 #'
@@ -95,30 +96,26 @@ subsetDatetime <- function(formattedQ, startDT, endDT){
 #' @export
 #'
 #' @examples
-#' Qdat_xts_cfs <- FormattedQ2xts(SampleQ_1week_formatted)
-#' Qdat_xts_cms <- FormattedQ2xts(SampleQ_1week_formatted, unit='cms')
-FormattedQ2xts <- function(formattedQ, unit = 'cfs') {
-  if (!unit %in% c("cfs", "cms")) {
-    stop("Unit must be 'cfs' or 'cms'")
+#' Qdat_xts_cfs <- convert_to_xts(SampleQ_1week_formatted)
+#' Qdat_xts_cms <- convert_to_xts(SampleQ_1week_formatted, column_choice ="Discharge_cms")
+convert_to_xts <- function(data, column_choice = "Discharge_cfs" ) {
+  # Validate column choice
+  if(!column_choice %in% c("Discharge_cfs", "Discharge_cms")) {
+    stop("Invalid column choice. Choose either 'Discharge_cfs' or 'Discharge_cms'")
   }
 
-  # Check if necessary columns exist in formattedQ
-  requiredCols <- c("dateTime")
-  if(unit == 'cms') {
-    requiredCols <- c(requiredCols, "Discharge_cms")
-  } else {
-    requiredCols <- c(requiredCols, "Discharge_cfs")
+  # Select the datetime and the chosen data column
+  selected_data <- data[, c("dateTime", column_choice)]
+
+  # Convert dateTime to POSIXct if not already
+  if (!inherits(selected_data$dateTime, "POSIXct")) {
+    selected_data$dateTime <- base::as.POSIXct(selected_data$dateTime)
   }
 
-  if (!all(requiredCols %in% names(formattedQ))) {
-    stop(paste("Missing required columns:", paste(requiredCols[!requiredCols %in% names(formattedQ)], collapse=", ")))
-  }
+  # Create an xts object
+  xts_data <- xts::xts(selected_data[, -1], order.by = selected_data$dateTime)
 
-  # Select appropriate discharge column based on the unit
-  dischargeColumn <- if(unit == 'cms') formattedQ$Discharge_cms else formattedQ$Discharge_cfs
-
-  Qdat <- xts::xts(x= dischargeColumn, order.by = formattedQ$dateTime)
-
-  return(Qdat)
+  return(xts_data)
 }
+
 

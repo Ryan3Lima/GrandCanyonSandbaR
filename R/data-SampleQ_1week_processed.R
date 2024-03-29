@@ -11,7 +11,7 @@
 #'   \item{\code{dateTime}}{A POSIXct date-time indicating the time of the measurement.}
 #'   \item{\code{Discharge_cfs}}{Numeric streamflow data, measured in cubic feet per second (cfs).}
 #'   \itme{\code{Discharge_cms}}{Numeric streamflow data, measured in cubic meters per second (cms)}
-#'
+#'}
 #' @source USGS National Water Information System
 #' @references
 #' \url{https://waterdata.usgs.gov/nwis}
