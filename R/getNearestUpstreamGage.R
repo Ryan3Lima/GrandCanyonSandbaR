@@ -27,10 +27,10 @@ getNearestUpstreamGage <- function(riverMile, messages = F) {
   validIndices <- which(GageRiverMiles <= riverMile)
   nearestUpstreamGage <- max(GageRiverMiles[GageRiverMiles <= riverMile])
   nearestUpstreamGageIndex <- max(validIndices)
-  if(messages == TRUE){
+  if(messages){ # Max - You can remove the Boolean == TRUE, it will look a little cleaner and easier to maintain
   print(paste0("The Nearest Upstream Gage to riverMile:", riverMile, " is: ",GageList$GageNameStr[nearestUpstreamGageIndex], ' -- at riverMile: ',nearestUpstreamGage  ))
   print(paste0("Returning index for nearest upstream gage in data frame: GageList:", nearestUpstreamGageIndex))}
   return(nearestUpstreamGageIndex)
 }
 
-
+# Max - Nice function!

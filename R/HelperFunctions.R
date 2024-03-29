@@ -13,7 +13,7 @@ library(xts)
 #' cms2cfs(cms = 445, messages = FALSE)
 cms2cfs <- function(cms, messages = FALSE){
   cfs <- cms* 35.31468492103444
-  if (messages == TRUE){
+  if(messages){
     print(paste0("Converting ",cms," -- Cubic Meters per second to Cubic feet per second by multiplying 35.31468492103444" ))
     print(paste0("result =[", cfs,"] Cubic Feet Per Second"))
   }
@@ -33,7 +33,7 @@ cms2cfs <- function(cms, messages = FALSE){
 #' cfs2cms(cfs = 10000, messages = FALSE)
 cfs2cms <- function(cfs, messages = FALSE){
   cms <- cfs/35.31468492103444
-  if (messages == TRUE){
+  if(messages){
     print(paste0("Converting ",cfs," -- Cubic feet per second to Cubic meters per second by dividing by 35.31468492103444" ))
     print(paste0("result =[", cms,"] Cubic Meters Per Second"))
   }
@@ -54,11 +54,11 @@ cfs2cms <- function(cfs, messages = FALSE){
 #' Qdat_formatted <- convertQdataRaw2FormattedQ(SampleQ_1week_raw)
 convertQdataRaw2FormattedQ <- function(Qdata, xcol_index = 4, DTcol_index = 3){
   formattedQ <- Qdata %>%
-    dplyr::mutate(dateTime =base::as.POSIXct(.[[DTcol_index]], format = "%Y-%m-%d_%H%M", tz = "MST"))%>%
+    dplyr::mutate(dateTime = as.POSIXct(.[[DTcol_index]], format = "%Y-%m-%d_%H%M", tz = "MST"))%>%
     dplyr::mutate(Discharge_cfs = .[[xcol_index]])%>%
-    dplyr::mutate(Discharge_cms = GrandCanyonSandbaR::cfs2cms(.[[xcol_index]])) %>%
+    dplyr::mutate(Discharge_cms = cfs2cms(.[[xcol_index]])) %>%
     dplyr::select(dateTime,Discharge_cfs,Discharge_cms)
-  return(formattedQ )
+  return(formattedQ)
 }
 
 
@@ -73,8 +73,8 @@ convertQdataRaw2FormattedQ <- function(Qdata, xcol_index = 4, DTcol_index = 3){
 #' @examples
 #' Qdat_Subset<-subsetDatetime(SampleQ_1week_formatted,'20141003_0600', '20140109_1200')
 subsetDatetime <- function(formattedQ, startDT, endDT){
-  startDT_posix <- base::as.POSIXct(startDT, format = "%Y%m%d_%H%M", tz = "MST")
-  endDT_posix <- base::as.POSIXct(endDT, format = "%Y%m%d_%H%M", tz = "MST")
+  startDT_posix <- as.POSIXct(startDT, format = "%Y%m%d_%H%M", tz = "MST")
+  endDT_posix <- as.POSIXct(endDT, format = "%Y%m%d_%H%M", tz = "MST")
   if (startDT_posix < min(formattedQ$dateTime)){
     stop('startDT is out of range')
   } else {print("startDT in range")}
@@ -98,26 +98,48 @@ subsetDatetime <- function(formattedQ, startDT, endDT){
 #' Qdat_xts_cfs <- FormattedQ2xts(SampleQ_1week_formatted)
 #' Qdat_xts_cms <- FormattedQ2xts(SampleQ_1week_formatted, unit='cms')
 FormattedQ2xts <- function(formattedQ, unit = 'cfs') {
-  if (!unit %in% c("cfs", "cms")) {
-    stop("Unit must be 'cfs' or 'cms'")
+  # Max - You could check the column names for "cfs" or "cms"
+  # Looks for unit string in the columns and returns the name of the column
+  if(any(grep(unit, names(formattedQ), ignore.case = T))){
+    print(paste0("Found '",unit,"'column"))
+    columnName <- grep("cfs", names(formattedQ), value = T) # Max - You could pass this string into the required columns step
+  }else{
+    # Force the format to be the unit
+    stop(paste("Could not find column '", unit,"' in input object."))
   }
-
-  # Check if necessary columns exist in formattedQ
-  requiredCols <- c("dateTime")
-  if(unit == 'cms') {
-    requiredCols <- c(requiredCols, "Discharge_cms")
-  } else {
-    requiredCols <- c(requiredCols, "Discharge_cfs")
+  dateTime <- "dateTime"
+  if(any(grep(dateTime, names(formattedQ), ignore.case = T))){
+    print(paste0("Found '",dateTime,"' column"))
+    dateTimeColumn <- grep(dateTime, names(formattedQ), value = T) # Max - You could pass this string into the required columns step
+  }else{
+    # Force the format to be the unit
+    stop(paste("Could not find a '", dateTime,"' in input object."))
   }
+  # Max - you could add a try step to get the 'cms' or 'cfs' if you can't find the
+  # desired unit
+  # try("cfs"), else try("cms") # not real code
+  Qdat <- xts::xts(x= formattedQ[columnName], order.by = formattedQ[[dateTimeColumn]])
 
-  if (!all(requiredCols %in% names(formattedQ))) {
-    stop(paste("Missing required columns:", paste(requiredCols[!requiredCols %in% names(formattedQ)], collapse=", ")))
-  }
-
-  # Select appropriate discharge column based on the unit
-  dischargeColumn <- if(unit == 'cms') formattedQ$Discharge_cms else formattedQ$Discharge_cfs
-
-  Qdat <- xts::xts(x= dischargeColumn, order.by = formattedQ$dateTime)
+  # if (!unit %in% c("cfs", "cms")) {
+  #   stop("Unit must be 'cfs' or 'cms'")
+  # }
+  #
+  # # Check if necessary columns exist in formattedQ
+  # requiredCols <- c("dateTime")
+  # if(unit == 'cms') {
+  #   requiredCols <- c(requiredCols, "Discharge_cms")
+  # } else {
+  #   requiredCols <- c(requiredCols, "Discharge_cfs")
+  # }
+  #
+  # if (!all(requiredCols %in% names(formattedQ))) {
+  #   stop(paste("Missing required columns:", paste(requiredCols[!requiredCols %in% names(formattedQ)], collapse=", ")))
+  # }
+  #
+  # # Select appropriate discharge column based on the unit
+  # dischargeColumn <- if(unit == 'cms'){formattedQ$Discharge_cms} else{formattedQ$Discharge_cfs}
+  #
+  # Qdat <- xts::xts(x= dischargeColumn, order.by = formattedQ$dateTime)
 
   return(Qdat)
 }
