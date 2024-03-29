@@ -16,9 +16,6 @@
     <loc>/index.html</loc>
   </url>
   <url>
-    <loc>/reference/FormattedQ2xts.html</loc>
-  </url>
-  <url>
     <loc>/reference/GageList.html</loc>
   </url>
   <url>
@@ -37,10 +34,19 @@
     <loc>/reference/convertQdataRaw2FormattedQ.html</loc>
   </url>
   <url>
+    <loc>/reference/convert_to_xts.html</loc>
+  </url>
+  <url>
+    <loc>/reference/findLagtime.html</loc>
+  </url>
+  <url>
     <loc>/reference/getNearestUpstreamGage.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plotInteractiveHydrograph.html</loc>
   </url>
   <url>
     <loc>/reference/subsetDatetime.html</loc>
