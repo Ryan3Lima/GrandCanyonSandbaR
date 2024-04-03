@@ -10,6 +10,12 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
+    <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/test-vignette.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -19,10 +25,25 @@
     <loc>/reference/GageList.html</loc>
   </url>
   <url>
+    <loc>/reference/GenerateEquallySpacedStageDischarge.html</loc>
+  </url>
+  <url>
     <loc>/reference/SampleQ_1week_processed.html</loc>
   </url>
   <url>
     <loc>/reference/SampleQ_1week_raw.html</loc>
+  </url>
+  <url>
+    <loc>/reference/SampleQ_xts_cfs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/SampleQ_xts_cms.html</loc>
+  </url>
+  <url>
+    <loc>/reference/SandbarSites.html</loc>
+  </url>
+  <url>
+    <loc>/reference/StageDischargeData.html</loc>
   </url>
   <url>
     <loc>/reference/cfs2cms.html</loc>
@@ -40,6 +61,15 @@
     <loc>/reference/findLagtime.html</loc>
   </url>
   <url>
+    <loc>/reference/findSiteElevation.html</loc>
+  </url>
+  <url>
+    <loc>/reference/find_Q_from_WSE.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fitGeneralizedPowerLawModel.html</loc>
+  </url>
+  <url>
     <loc>/reference/getNearestUpstreamGage.html</loc>
   </url>
   <url>
@@ -50,5 +80,8 @@
   </url>
   <url>
     <loc>/reference/subsetDatetime.html</loc>
+  </url>
+  <url>
+    <loc>/reference/validSite.html</loc>
   </url>
 </urlset>

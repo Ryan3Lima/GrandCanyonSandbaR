@@ -25,6 +25,16 @@
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/test-vignette.html">test-vignette</a>
+    </li>
+  </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -66,12 +76,10 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cfs2cms</span><span class="op">(</span>cfs <span class="op">=</span> <span class="fl">8000</span>, messages <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Converting 8000 -- Cubic feet per second to Cubic meters per second by dividing by 35.31468492103444"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "result =[226.534655990516] Cubic Meters Per Second"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 226.5347</span>
-<span class="r-in"><span><span class="fu">cfs2cms</span><span class="op">(</span>cfs <span class="op">=</span> <span class="fl">10000</span>, messages <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 283.1683</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">cfs2cms</span><span class="op">(</span>cfs <span class="op">=</span> <span class="fl">8000</span>, messages <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">cfs2cms</span><span class="op">(</span>cfs <span class="op">=</span> <span class="fl">10000</span>, messages <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>

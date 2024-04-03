@@ -25,6 +25,16 @@
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/test-vignette.html">test-vignette</a>
+    </li>
+  </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -46,13 +56,36 @@
         </td>
         <td><p>Gage List Data</p></td>
       </tr><tr><td>
-          <p><code><a href="SampleQ_1week_processed.html">SampleQ_1week_formatted</a></code> </p>
+          <p><code><a href="GenerateEquallySpacedStageDischarge.html">GenerateEquallySpacedStageDischarge()</a></code> </p>
+        </td>
+        <td><p>Generate Equally Spaced Stage-Discharge Grid</p></td>
+      </tr><tr><td>
+          <p><code><a href="SampleQ_1week_processed.html">SampleQ_1week_processed</a></code> </p>
         </td>
         <td><p>Sample processed or Formatted Discharge Data for one week</p></td>
       </tr><tr><td>
           <p><code><a href="SampleQ_1week_raw.html">SampleQ_1week_raw</a></code> </p>
         </td>
         <td><p>Sample Discharge Data for One Week</p></td>
+      </tr><tr><td>
+          <p><code><a href="SampleQ_xts_cfs.html">SampleQ_xts_cfs</a></code> </p>
+        </td>
+        <td><p>SampleQ_xts_cfs: Discharge in cubic feet per second</p></td>
+      </tr><tr><td>
+          <p><code><a href="SampleQ_xts_cms.html">SampleQ_xts_cms</a></code> </p>
+        </td>
+        <td><p>SampleQ_xts_cms: Discharge in cubic meters per second
+A dataset containing observations of discharge in cubic meters per second (cms)
+from a specified location over a one-week period in October 2014.
+The data is formatted as an xts time series object for easy time series analysis.</p></td>
+      </tr><tr><td>
+          <p><code><a href="SandbarSites.html">SandbarSites</a></code> </p>
+        </td>
+        <td><p>Sandbar Sites</p></td>
+      </tr><tr><td>
+          <p><code><a href="StageDischargeData.html">StageDischargeData</a></code> </p>
+        </td>
+        <td><p>Stage-Discharge Data for Sandbar Sites</p></td>
       </tr><tr><td>
           <p><code><a href="cfs2cms.html">cfs2cms()</a></code> </p>
         </td>
@@ -68,11 +101,23 @@
       </tr><tr><td>
           <p><code><a href="convert_to_xts.html">convert_to_xts()</a></code> </p>
         </td>
-        <td><p>Turn Formatted discharge data into an xts time-series object for plotting with dygraph</p></td>
+        <td><p>Convert Data to XTS Object</p></td>
       </tr><tr><td>
           <p><code><a href="findLagtime.html">findLagtime()</a></code> </p>
         </td>
         <td><p>Calculate Lag Time Based on River Mile</p></td>
+      </tr><tr><td>
+          <p><code><a href="findSiteElevation.html">findSiteElevation()</a></code> </p>
+        </td>
+        <td><p>Find Site Elevation Range</p></td>
+      </tr><tr><td>
+          <p><code><a href="find_Q_from_WSE.html">find_Q_from_WSE()</a></code> </p>
+        </td>
+        <td><p>Find Discharge for a Given Stage Elevation</p></td>
+      </tr><tr><td>
+          <p><code><a href="fitGeneralizedPowerLawModel.html">fitGeneralizedPowerLawModel()</a></code> </p>
+        </td>
+        <td><p>Fit Generalized Power Law Model</p></td>
       </tr><tr><td>
           <p><code><a href="getNearestUpstreamGage.html">getNearestUpstreamGage()</a></code> </p>
         </td>
@@ -85,6 +130,10 @@
           <p><code><a href="subsetDatetime.html">subsetDatetime()</a></code> </p>
         </td>
         <td><p>Subset discharge data with two timestamps 'YYYYMMDD_HHMM'</p></td>
+      </tr><tr><td>
+          <p><code><a href="validSite.html">validSite()</a></code> </p>
+        </td>
+        <td><p>Validate Site Name</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
