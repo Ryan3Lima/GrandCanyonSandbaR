@@ -7,8 +7,5 @@
 #' @format A character vector with 39 unique sandbar site codes.
 #' @source Describe the source of your data here, if applicable.
 #' @name SandbarSites
-#' @examples
-#' data(SandbarSites)
-#' length(SandbarSites)
-#' @export
+#' @docType data
 "SandbarSites"

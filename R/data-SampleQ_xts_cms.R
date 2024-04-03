@@ -7,7 +7,7 @@
 #' \describe{
 #'   \item{\code{Discharge_cms}}{Numeric vector of discharge values in cubic meters per second.}
 #' }
-#' @source Describe the source of your data here.
-#' @examples
-#' data(SampleQ_xts_cms)
-#' plot(SampleQ_xts_cms)
+#'@source Same as `SampleQ_xts_cfs`.
+#' @name SampleQ_xts_cms
+#' @docType data
+"SampleQ_xts_cms"

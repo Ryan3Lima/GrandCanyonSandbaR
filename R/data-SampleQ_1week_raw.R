@@ -20,5 +20,4 @@
 #' @keywords datasets
 #' @name SampleQ_1week_raw
 #' @docType data
-#' @usage data(SampleQ_1week_raw)
 "SampleQ_1week_raw"

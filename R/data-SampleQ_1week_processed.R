@@ -10,7 +10,7 @@
 #' \describe{
 #'   \item{\code{dateTime}}{A POSIXct date-time indicating the time of the measurement.}
 #'   \item{\code{Discharge_cfs}}{Numeric streamflow data, measured in cubic feet per second (cfs).}
-#'   \itme{\code{Discharge_cms}}{Numeric streamflow data, measured in cubic meters per second (cms)}
+#'   \item{\code{Discharge_cms}}{Numeric streamflow data, measured in cubic meters per second (cms)}
 #'}
 #' @source USGS National Water Information System
 #' @references
@@ -18,5 +18,4 @@
 #' @keywords datasets
 #' @name SampleQ_1week_processed
 #' @docType data
-#' @usage data(SampleQ_1week_formatted)
-"SampleQ_1week_raw"
+"SampleQ_1week_processed"

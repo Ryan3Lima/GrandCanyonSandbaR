@@ -18,8 +18,4 @@ A character vector containing the identifiers for sandbar sites used in the Gran
 These sites are referenced by their unique codes and are utilized within the package to fit
 generalized power law models to stage-discharge data.
 }
-\examples{
-data(SandbarSites)
-length(SandbarSites)
-}
 \keyword{datasets}

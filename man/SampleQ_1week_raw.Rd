@@ -19,7 +19,7 @@ A data frame with 768 rows and 6 columns:
 USGS Water Data for the Nation
 }
 \usage{
-data(SampleQ_1week_raw)
+SampleQ_1week_raw
 }
 \description{
 A dataset containing raw discharge measurements for a specific USGS site

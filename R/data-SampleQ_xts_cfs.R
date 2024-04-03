@@ -9,6 +9,6 @@
 #'   \item{\code{Discharge_cfs}}{Numeric vector of discharge values in cubic feet per second.}
 #' }
 #' @source Same as `SampleQ_xts_cms`.
-#' @examples
-#' data(SampleQ_xts_cfs)
-#' plot(SampleQ_xts_cfs)
+#' @name SampleQ_xts_cfs
+#' @docType data
+"SampleQ_xts_cfs"

@@ -21,7 +21,7 @@ A data frame with 6 rows and 8 columns:
 Data imported from Google Sheets.
 }
 \usage{
-data(GageList)
+GageList
 }
 \description{
 This dataset contains information about various gaging stations, including their IDs, names, river mile numbers, data file paths, data sources, start dates of the data, lag slopes, and lag intercepts. The data was imported from a Google Sheets document as part of the package data preparation process.

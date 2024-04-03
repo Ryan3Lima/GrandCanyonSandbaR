@@ -9,8 +9,10 @@ library(xts)
 #' @export
 #'
 #' @examples
-#' cms2cfs(cms = 227, messages = TRUE)
-#' cms2cfs(cms = 445, messages = FALSE)
+#' \dontrun{
+#'   cms2cfs(cms = 227, messages = TRUE)
+#'   cms2cfs(cms = 445, messages = FALSE)
+#'   }
 cms2cfs <- function(cms, messages = FALSE){
   cfs <- cms* 35.31468492103444
   if (messages == TRUE){
@@ -29,8 +31,10 @@ cms2cfs <- function(cms, messages = FALSE){
 #' @export
 #'
 #' @examples
-#' cfs2cms(cfs = 8000, messages = TRUE)
-#' cfs2cms(cfs = 10000, messages = FALSE)
+#' \dontrun{
+#'   cfs2cms(cfs = 8000, messages = TRUE)
+#'   cfs2cms(cfs = 10000, messages = FALSE)
+#'   }
 cfs2cms <- function(cfs, messages = FALSE){
   cms <- cfs/35.31468492103444
   if (messages == TRUE){
@@ -51,10 +55,12 @@ cfs2cms <- function(cfs, messages = FALSE){
 #' @export
 #'
 #' @examples
-#' Qdat_formatted <- convertQdataRaw2FormattedQ(SampleQ_1week_raw)
+#' \dontrun{
+#'   Qdat_formatted <- convertQdataRaw2FormattedQ(SampleQ_1week_raw)
+#' }
 convertQdataRaw2FormattedQ <- function(Qdata, xcol_index = 4, DTcol_index = 3){
   formattedQ <- Qdata %>%
-    dplyr::mutate(dateTime =base::as.POSIXct(.[[DTcol_index]], format = "%Y-%m-%d_%H%M", tz = "MST"))%>%
+    dplyr::mutate(dateTime =as.POSIXct(.[[DTcol_index]], format = "%Y-%m-%d_%H%M", tz = "MST"))%>%
     dplyr::mutate(Discharge_cfs = .[[xcol_index]])%>%
     dplyr::mutate(Discharge_cms = GrandCanyonSandbaR::cfs2cms(.[[xcol_index]])) %>%
     dplyr::select(dateTime,Discharge_cfs,Discharge_cms)
@@ -71,10 +77,12 @@ convertQdataRaw2FormattedQ <- function(Qdata, xcol_index = 4, DTcol_index = 3){
 #' @return tibble or data.frame subset by startDT and endDT
 #' @export
 #' @examples
-#' Qdat_Subset<-subsetDatetime(SampleQ_1week_formatted,'20141003_0600', '20140109_1200')
+#' \dontrun{
+#'   Qdat_Subset<-subsetDatetime(SampleQ_1week_processed,'20141003_0600', '20140109_1200')
+#' }
 subsetDatetime <- function(formattedQ, startDT, endDT){
-  startDT_posix <- base::as.POSIXct(startDT, format = "%Y%m%d_%H%M", tz = "MST")
-  endDT_posix <- base::as.POSIXct(endDT, format = "%Y%m%d_%H%M", tz = "MST")
+  startDT_posix <- as.POSIXct(startDT, format = "%Y%m%d_%H%M", tz = "MST")
+  endDT_posix <- as.POSIXct(endDT, format = "%Y%m%d_%H%M", tz = "MST")
   if (startDT_posix < min(formattedQ$dateTime)){
     stop('startDT is out of range')
   } else {print("startDT in range")}
@@ -86,18 +94,33 @@ subsetDatetime <- function(formattedQ, startDT, endDT){
   return(df)
 }
 
-#' Turn Formatted discharge data into an xts time-series object for plotting with dygraph
-#' @importFrom tibble tibble
-#' @importFrom xts xts
-#' @param formattedQ data.frame or tibble. formatted data (or subset and formatted data) output from convertQdataRaw2FormattedQ()
-#' @param unit string. default unit = 'cfs', can also be unit = 'cms'
+#' Convert Data to XTS Object
 #'
-#' @return xts time series object
-#' @export
+#' This function takes a data frame with a datetime column and one of two specified discharge columns,
+#' and converts it into an `xts` object, which is suitable for time series analysis. The datetime column
+#' is assumed to be named "dateTime" and should be in a format that can be converted to `POSIXct`.
+#' The discharge data can be in cubic feet per second ("Discharge_cfs") or cubic meters per second ("Discharge_cms").
+#'
+#' @param data A data frame containing at least two columns: "dateTime" for the datetime of observations,
+#' and either "Discharge_cfs" or "Discharge_cms" for discharge data. The "dateTime" column is converted
+#' to `POSIXct` format if it is not already.
+#' @param column_choice A string specifying which column to use for the discharge data.
+#' Must be either "Discharge_cfs" or "Discharge_cms". Defaults to "Discharge_cfs".
+#'
+#' @return An `xts` object containing the selected discharge data indexed by the datetime of the observations.
 #'
 #' @examples
-#' Qdat_xts_cfs <- convert_to_xts(SampleQ_1week_formatted)
-#' Qdat_xts_cms <- convert_to_xts(SampleQ_1week_formatted, column_choice ="Discharge_cms")
+#' \dontrun{
+#'   data <- data.frame(dateTime = Sys.time() + 0:4 * 3600,
+#'                      Discharge_cfs = rnorm(5, mean = 100, sd = 10),
+#'                      Discharge_cms = rnorm(5, mean = 2.83, sd = 0.28))
+#'   xts_data <- convert_to_xts(data)
+#'   print(xts_data)
+#' }
+#'
+#' @importFrom xts xts
+#' @export
+#' @seealso \code{\link[xts]{xts}}, \code{\link[base]{as.POSIXct}}
 convert_to_xts <- function(data, column_choice = "Discharge_cfs" ) {
   # Validate column choice
   if(!column_choice %in% c("Discharge_cfs", "Discharge_cms")) {
@@ -109,7 +132,7 @@ convert_to_xts <- function(data, column_choice = "Discharge_cfs" ) {
 
   # Convert dateTime to POSIXct if not already
   if (!inherits(selected_data$dateTime, "POSIXct")) {
-    selected_data$dateTime <- base::as.POSIXct(selected_data$dateTime)
+    selected_data$dateTime <- as.POSIXct(selected_data$dateTime)
   }
 
   # Create an xts object

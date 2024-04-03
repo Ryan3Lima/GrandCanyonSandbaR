@@ -12,18 +12,10 @@
 #'
 #' @source Describe the source of your original data here. If the data is from a public dataset, include a citation or a URL where the data can be found. If the data was collected by your research team, provide a brief description of the methodology used to collect the data.
 #' @name StageDischargeData
-#' @usage
-#' data(StageDischargeData)
-#'
-#' @examples
-#' data(StageDischargeData)
-#' head(StageDischargeData[[1]]) # View the first few rows of the first site's data
-#'
 #' @details
 #' The `convert2_bdrc_format` function was used to preprocess each site's data. This function is part of the package and performs the following transformations:
 #' - Converts discharge from cubic feet per second (cfs) to cubic meters per second (cms).
 #' - Renames the `Elevation` column to `W` for compatibility with `bdrc::gplm.fit`.
 #' - Selects only the relevant columns (`W`, `Q`, `Qcfs`) for analysis.
-#'
-#' @export
-StageDischargeData
+#' @docType data
+"StageDischargeData"

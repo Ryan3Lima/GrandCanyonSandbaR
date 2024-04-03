@@ -2,22 +2,37 @@
 % Please edit documentation in R/HelperFunctions.R
 \name{convert_to_xts}
 \alias{convert_to_xts}
-\title{Turn Formatted discharge data into an xts time-series object for plotting with dygraph}
+\title{Convert Data to XTS Object}
 \usage{
 convert_to_xts(data, column_choice = "Discharge_cfs")
 }
 \arguments{
-\item{formattedQ}{data.frame or tibble. formatted data (or subset and formatted data) output from convertQdataRaw2FormattedQ()}
+\item{data}{A data frame containing at least two columns: "dateTime" for the datetime of observations,
+and either "Discharge_cfs" or "Discharge_cms" for discharge data. The "dateTime" column is converted
+to \code{POSIXct} format if it is not already.}
 
-\item{unit}{string. default unit = 'cfs', can also be unit = 'cms'}
+\item{column_choice}{A string specifying which column to use for the discharge data.
+Must be either "Discharge_cfs" or "Discharge_cms". Defaults to "Discharge_cfs".}
 }
 \value{
-xts time series object
+An \code{xts} object containing the selected discharge data indexed by the datetime of the observations.
 }
 \description{
-Turn Formatted discharge data into an xts time-series object for plotting with dygraph
+This function takes a data frame with a datetime column and one of two specified discharge columns,
+and converts it into an \code{xts} object, which is suitable for time series analysis. The datetime column
+is assumed to be named "dateTime" and should be in a format that can be converted to \code{POSIXct}.
+The discharge data can be in cubic feet per second ("Discharge_cfs") or cubic meters per second ("Discharge_cms").
 }
 \examples{
-Qdat_xts_cfs <- convert_to_xts(SampleQ_1week_formatted)
-Qdat_xts_cms <- convert_to_xts(SampleQ_1week_formatted, column_choice ="Discharge_cms")
+\dontrun{
+  data <- data.frame(dateTime = Sys.time() + 0:4 * 3600,
+                     Discharge_cfs = rnorm(5, mean = 100, sd = 10),
+                     Discharge_cms = rnorm(5, mean = 2.83, sd = 0.28))
+  xts_data <- convert_to_xts(data)
+  print(xts_data)
+}
+
+}
+\seealso{
+\code{\link[xts]{xts}}, \code{\link[base]{as.POSIXct}}
 }

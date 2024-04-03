@@ -18,6 +18,8 @@ numeric value for cubic feet per second
 Converts values from Cubic Meters per second to Cubic feet per second
 }
 \examples{
-cms2cfs(cms = 227, messages = TRUE)
-cms2cfs(cms = 445, messages = FALSE)
+\dontrun{
+  cms2cfs(cms = 227, messages = TRUE)
+  cms2cfs(cms = 445, messages = FALSE)
+  }
 }

@@ -1,6 +1,8 @@
-
-#' @import dplyr
-#' @import bdrc
+#' @importFrom dplyr %>%
+#' @importFrom bdrc gplm
+#' @importFrom graphics plot
+#' @importFrom stats setNames
+#' @importFrom utils data
 NULL
 
 #' Validate Site Name
@@ -36,12 +38,12 @@ fitGeneralizedPowerLawModel <- function(sitename){
   index <- which(SandbarSites == sitename)
   df <- StageDischargeData[[index]]
   df <- as.data.frame(df)
-  print('Using Package bdrc -- Bayesian Discharge Rating Curve')
-  print(paste0("Using bdrc::gplm.fit to fit a generalized power law model for stage-discharge at: ", sitename, ' Sandbar'))
-  print("This may take a few moments")
+  message('Using Package bdrc -- Bayesian Discharge Rating Curve')
+  message(paste0("Using bdrc::gplm.fit to fit a generalized power law model for stage-discharge at: ", sitename, ' Sandbar'))
+  message("This may take a few moments")
   gplm.fit <- bdrc::gplm(Q ~ W, data = df, parallel = TRUE, num_cores = 2)
-  print("Plotting Rating Curve")
-  plot(gplm.fit)
+  message("Plotting Rating Curve")
+  graphics::plot(gplm.fit)
   return(gplm.fit)
 }
 
@@ -63,8 +65,8 @@ findSiteElevation <- function(sitename){
   df <- as.data.frame(df)
   min_elevation <- round(min(df$W), 3)
   max_elevation <- round(max(df$W), 3)
-  print(paste0("Minimum SD Elevation for site:", sitename, " = ", min_elevation))
-  print(paste0("Maximum SD Elevation for site:", sitename, " = ", max_elevation))
+  message(paste0("Minimum SD Elevation for site:", sitename, " = ", min_elevation))
+  message(paste0("Maximum SD Elevation for site:", sitename, " = ", max_elevation))
   elevation_range <- c(min_elevation, max_elevation)
   return(elevation_range)
 }
@@ -89,12 +91,12 @@ GenerateEquallySpacedStageDischarge <- function(sitename, ElevIncrement = 0.001)
   min_elevation <- round(min(df$W), 3)
   max_elevation <- round(max(df$W), 3)
   model <- fitGeneralizedPowerLawModel(sitename)
-  print('Generating equally spaced grid of elevations')
-  print(paste0("from: ", min_elevation, " Meters to: ", max_elevation, " Meters"))
-  print(paste0("increments of: ", ElevIncrement, " Meters"))
+  message('Generating equally spaced grid of elevations')
+  message(paste0("from: ", min_elevation, " Meters to: ", max_elevation, " Meters"))
+  message(paste0("increments of: ", ElevIncrement, " Meters"))
   h_grid <- seq(min_elevation, max_elevation, by = ElevIncrement)
-  # Assume `predict` and subsequent transformation logic to be implemented here
-  Grid <- data.frame(Elevation = h_grid) # Placeholder for actual prediction and transformation logic
+  # Placeholder for prediction logic, using bdrc::predict or similar
+  Grid <- data.frame(Elevation = h_grid) # This should be replaced with actual logic
   return(Grid)
 }
 
@@ -113,7 +115,7 @@ GenerateEquallySpacedStageDischarge <- function(sitename, ElevIncrement = 0.001)
 #' @export
 find_Q_from_WSE <- function(Sitename, Grid, Elevation){
   validSite(Sitename) # Ensure site is valid
-  # Assume the rest of the function is correctly implemented
-  dat <- Grid[1,] # Placeholder for actual lookup logic
+  # Placeholder for actual lookup logic
+  dat <- Grid[1,] # This should be replaced with actual logic
   return(dat)
 }

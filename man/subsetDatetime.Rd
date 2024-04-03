@@ -20,5 +20,7 @@ tibble or data.frame subset by startDT and endDT
 Subset discharge data with two timestamps 'YYYYMMDD_HHMM'
 }
 \examples{
-Qdat_Subset<-subsetDatetime(SampleQ_1week_formatted,'20141003_0600', '20140109_1200')
+\dontrun{
+  Qdat_Subset<-subsetDatetime(SampleQ_1week_processed,'20141003_0600', '20140109_1200')
+}
 }

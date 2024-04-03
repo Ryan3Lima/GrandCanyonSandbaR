@@ -1,0 +1,71 @@
+---
+title: "test-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{test-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(GrandCanyonSandbaR)
+```
+
+### Find the Nearest Upstream Gage to any riverMile
+This function is critical in caluclating the lag time, or the time it takes flow to travel from
+the nearest upstream gage to the location of your sandbar site
+```{r}
+
+riverMile = 167.3
+getNearestUpstreamGage(riverMile, messages = TRUE)
+
+
+```
+### Calculate the Lagtime between any point in the canyon and the nearest upstream gage
+once lag time is calculated, local hydrographs and flow patterns can be calculated for each site. (comming soon)
+```{r}
+
+out <- findLagtime(rivermile = 32.9, message = TRUE)
+print(out)
+
+
+```
+
+### Plot an interactive Hydrograph
+The interactivity is helpful for zooming in and looking at flow patterns, NOTE: this function uses
+dygraphs which requires the discharge data to be in xts format
+```{r}
+data("SampleQ_xts_cfs")
+ plotInteractiveHydrograph(Qdat = SampleQ_xts_cfs,
+   title= "Colorado River Discharge at Lees Ferry",
+   subtitle = "October 3rd 2014 - October 11th 2014")
+ 
+```
+
+### plot stage discharge relationships at one of the sandbar sites
+This function takes the measured stage discharge data at each site from previous surveys
+and fits a a generalized power law model then outputs the model for use in other ways..
+```{r}
+
+model <- fitGeneralizedPowerLawModel('0307R') # Assumes '0307R' is a valid site in SandbarSites
+
+
+```
+
+### Next we will estimate discharge at a specified site using the stage discharge model
+we do this by generating a grid of equally spaced elevation increments and applying the model
+to calculate the likely discharge with lower and upper bounds for discharge in CFS and CMS
+```{r}
+
+
+grid <- GenerateEquallySpacedStageDischarge('2201R') # Assumes '2201R' is a valid site in SandbarSites
+discharge_info <- find_Q_from_WSE('2201R', grid, 400.002) # Assumes '2201R' is a valid site and grid is defined
+print(discharge_info)
+```

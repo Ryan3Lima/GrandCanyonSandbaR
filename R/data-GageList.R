@@ -15,5 +15,5 @@
 #' }
 #' @source Data imported from Google Sheets.
 #' @name GageList
-#' @usage data(GageList)
+#' @docType data
 "GageList"
