@@ -18,7 +18,8 @@ Imports:
     dygraphs,
     magrittr,
     xts,
-    lubridate
+    lubridate,
+    bdrc
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
