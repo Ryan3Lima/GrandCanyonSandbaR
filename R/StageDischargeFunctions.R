@@ -114,8 +114,17 @@ GenerateEquallySpacedStageDischarge <- function(sitename, ElevIncrement = 0.001)
 #' }
 #' @export
 find_Q_from_WSE <- function(Sitename, Grid, Elevation){
-  validSite(Sitename) # Ensure site is valid
-  # Placeholder for actual lookup logic
-  dat <- Grid[1,] # This should be replaced with actual logic
+  # check if sitename valid
+  validSite(Sitename)
+  # check if Elevation is Valid
+  Elevation_range <- findSiteElevation(Sitename)
+  if(Elevation >= Elevation_range[1] & Elevation <= Elevation_range[2]) {
+    print(paste0("valid elevation for site:", sitename))
+  }else{
+    stop(paste0(Elevation, " Not in Range: ", Elevation_range[1], '-to:', Elevation_range[2]))
+  }
+  G_i <- which.min(abs(Grid$Elevation - Elevation))
+  dat <- Grid[G_i,]
   return(dat)
+
 }
