@@ -34,11 +34,9 @@ specification of units in cubic feet per second (cfs) or cubic meters per second
 (cms). Additional parameters allow for customization of the plot title and subtitle.
 }
 \examples{
-\dontrun{
-data("SampleQ_xts_cfs")
 plotInteractiveHydrograph(Qdat = SampleQ_xts_cfs,
   title= "Colorado River Discharge at Lees Ferry",
   subtitle = "October 3rd 2014 - October 11th 2014")
-}
+
 
 }

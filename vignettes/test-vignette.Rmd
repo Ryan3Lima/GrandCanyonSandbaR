@@ -14,9 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(devtools)
-install_github("Ryan3Lima/GrandCanyonSandbaR")
+```{r setup, warning = FALSE, message = FALSE}
+
 library(GrandCanyonSandbaR)
 ```
 
@@ -64,10 +63,11 @@ model <- fitGeneralizedPowerLawModel('0307R') # Assumes '0307R' is a valid site 
 ### Next we will estimate discharge at a specified site using the stage discharge model
 we do this by generating a grid of equally spaced elevation increments and applying the model
 to calculate the likely discharge with lower and upper bounds for discharge in CFS and CMS
+
 ```{r}
 
 
-grid <- GenerateEquallySpacedStageDischarge('2201R') # Assumes '2201R' is a valid site in SandbarSites
+grid <- GenerateEquallySpacedStageDischarge(sitename = '2201R') # Assumes '2201R' is a valid site in SandbarSites
 discharge_info <- find_Q_from_WSE('2201R', grid, 400.002) # Assumes '2201R' is a valid site and grid is defined
 print(discharge_info)
 ```

@@ -15,7 +15,4 @@
 #' @source USGS National Water Information System
 #' @references
 #' \url{https://waterdata.usgs.gov/nwis}
-#' @keywords datasets
-#' @name SampleQ_1week_processed
-#' @docType data
 "SampleQ_1week_processed"

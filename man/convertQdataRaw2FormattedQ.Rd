@@ -20,7 +20,6 @@ xts object
 Process NWIS gage data, remove unwanted columns, create CFS column, change column names
 }
 \examples{
-\dontrun{
-  Qdat_formatted <- convertQdataRaw2FormattedQ(SampleQ_1week_raw)
-}
+Qdat_formatted <- convertQdataRaw2FormattedQ(SampleQ_1week_raw)
+
 }

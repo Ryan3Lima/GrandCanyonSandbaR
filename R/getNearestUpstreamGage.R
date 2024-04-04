@@ -1,4 +1,3 @@
-
 #' function to find the nearest upstream gage in Grand Canyon to the desired rivermile
 #'
 #' @param riverMile numeric value between 0 and 283
@@ -25,11 +24,13 @@ getNearestUpstreamGage <- function(riverMile, messages = F) {
 
   # Identify the indices of GageList where the value is less than or equal to riverMile
   validIndices <- which(GageRiverMiles <= riverMile)
+  # find nearest upstream gage
   nearestUpstreamGage <- max(GageRiverMiles[GageRiverMiles <= riverMile])
   nearestUpstreamGageIndex <- max(validIndices)
+  # messages if desired
   if(messages == TRUE){
-  print(paste0("The Nearest Upstream Gage to riverMile:", riverMile, " is: ",GageList$GageNameStr[nearestUpstreamGageIndex], ' -- at riverMile: ',nearestUpstreamGage  ))
-  print(paste0("Returning index for nearest upstream gage in data frame: GageList:", nearestUpstreamGageIndex))}
+  message(paste0("The Nearest Upstream Gage to riverMile:", riverMile, " is: ",GageList$GageNameStr[nearestUpstreamGageIndex], ' -- at riverMile: ',nearestUpstreamGage  ))
+  message(paste0("Returning index for nearest upstream gage in data frame: GageList:", nearestUpstreamGageIndex))}
   return(nearestUpstreamGageIndex)
 }
 

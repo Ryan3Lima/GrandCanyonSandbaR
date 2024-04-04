@@ -1,5 +1,4 @@
-
-library(xts)
+library(xts) # Do I need this?
 #' Converts values from Cubic Meters per second to Cubic feet per second
 #'
 #' @param cms numeric value for cubic meters per second
@@ -9,12 +8,12 @@ library(xts)
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#'   cms2cfs(cms = 227, messages = TRUE)
-#'   cms2cfs(cms = 445, messages = FALSE)
-#'   }
+#' cms2cfs(cms = 227, messages = TRUE)
+#' cms2cfs(cms = 445, messages = FALSE)
 cms2cfs <- function(cms, messages = FALSE){
+  # convert from cfs to cms
   cfs <- cms* 35.31468492103444
+  # message if desired
   if (messages == TRUE){
     print(paste0("Converting ",cms," -- Cubic Meters per second to Cubic feet per second by multiplying 35.31468492103444" ))
     print(paste0("result =[", cfs,"] Cubic Feet Per Second"))
@@ -28,13 +27,12 @@ cms2cfs <- function(cms, messages = FALSE){
 #' @param messages Boolean TRUE or FALSE; default = FALSE, use messages = T to get more information
 #'
 #' @return numeric value for cubic meters per second
-#' @export
+#'
 #'
 #' @examples
-#' \dontrun{
-#'   cfs2cms(cfs = 8000, messages = TRUE)
-#'   cfs2cms(cfs = 10000, messages = FALSE)
-#'   }
+#' cfs2cms(cfs = 8000, messages = TRUE)
+#' cfs2cms(cfs = 10000, messages = FALSE)
+#' @export
 cfs2cms <- function(cfs, messages = FALSE){
   cms <- cfs/35.31468492103444
   if (messages == TRUE){
@@ -53,16 +51,14 @@ cfs2cms <- function(cfs, messages = FALSE){
 #'
 #' @return xts object
 #' @export
-#'
 #' @examples
-#' \dontrun{
-#'   Qdat_formatted <- convertQdataRaw2FormattedQ(SampleQ_1week_raw)
-#' }
+#' Qdat_formatted <- convertQdataRaw2FormattedQ(SampleQ_1week_raw)
+#'
 convertQdataRaw2FormattedQ <- function(Qdata, xcol_index = 4, DTcol_index = 3){
   formattedQ <- Qdata %>%
     dplyr::mutate(dateTime =as.POSIXct(.[[DTcol_index]], format = "%Y-%m-%d_%H%M", tz = "MST"))%>%
     dplyr::mutate(Discharge_cfs = .[[xcol_index]])%>%
-    dplyr::mutate(Discharge_cms = GrandCanyonSandbaR::cfs2cms(.[[xcol_index]])) %>%
+    dplyr::mutate(Discharge_cms = cfs2cms(.[[xcol_index]])) %>%
     dplyr::select(dateTime,Discharge_cfs,Discharge_cms)
   return(formattedQ )
 }
@@ -77,9 +73,7 @@ convertQdataRaw2FormattedQ <- function(Qdata, xcol_index = 4, DTcol_index = 3){
 #' @return tibble or data.frame subset by startDT and endDT
 #' @export
 #' @examples
-#' \dontrun{
-#'   Qdat_Subset<-subsetDatetime(SampleQ_1week_processed,'20141003_0600', '20140109_1200')
-#' }
+#' Qdat_Subset<-subsetDatetime(SampleQ_1week_processed,'20141003_0600', '20140109_1200')
 subsetDatetime <- function(formattedQ, startDT, endDT){
   startDT_posix <- as.POSIXct(startDT, format = "%Y%m%d_%H%M", tz = "MST")
   endDT_posix <- as.POSIXct(endDT, format = "%Y%m%d_%H%M", tz = "MST")

@@ -2,7 +2,6 @@
 #' @importFrom bdrc gplm
 #' @importFrom graphics plot
 #' @importFrom stats setNames
-#' @importFrom utils data
 NULL
 
 #' Validate Site Name
@@ -12,14 +11,15 @@ NULL
 #' @param sitename A character string of the site name to validate.
 #' @return None; this function stops execution with an error message if the site name is invalid.
 #' @examples
-#' \dontrun{
-#'   validSite("0034L") # Assumes "0034L" is a valid site in SandbarSites
-#' }
+#'
+#'validSite("0034L") # Assumes "0034L" is a valid site in SandbarSites
+#'
 #' @export
 validSite <- function(sitename){
   if(!sitename %in% SandbarSites) {
-    stop("Invalid Sitename")
+    stop("Invalid sitename")
   }
+  message("Valid sitename")
 }
 
 #' Fit Generalized Power Law Model
@@ -54,9 +54,8 @@ fitGeneralizedPowerLawModel <- function(sitename){
 #' @param sitename A character string specifying the name of the sandbar site.
 #' @return A numeric vector with two elements: the minimum and maximum elevation.
 #' @examples
-#' \dontrun{
-#'   elevation_range <- findSiteElevation('2023R') # Assumes '2023R' is a valid site in SandbarSites
-#' }
+#' elevation_range <- findSiteElevation('2023R')
+#'
 #' @export
 findSiteElevation <- function(sitename){
   validSite(sitename) # Ensure site is valid
@@ -80,7 +79,7 @@ findSiteElevation <- function(sitename){
 #' @return A data frame containing the elevation grid and corresponding discharge predictions.
 #' @examples
 #' \dontrun{
-#'   grid <- GenerateEquallySpacedStageDischarge('2201R') # Assumes '2201R' is a valid site in SandbarSites
+#'   grid <- GenerateEquallySpacedStageDischarge('2201R')
 #' }
 #' @export
 GenerateEquallySpacedStageDischarge <- function(sitename, ElevIncrement = 0.001){
@@ -95,10 +94,19 @@ GenerateEquallySpacedStageDischarge <- function(sitename, ElevIncrement = 0.001)
   message(paste0("from: ", min_elevation, " Meters to: ", max_elevation, " Meters"))
   message(paste0("increments of: ", ElevIncrement, " Meters"))
   h_grid <- seq(min_elevation, max_elevation, by = ElevIncrement)
-  # Placeholder for prediction logic, using bdrc::predict or similar
-  Grid <- data.frame(Elevation = h_grid) # This should be replaced with actual logic
+  rating_curve_h_grid <- predict(model,newdata=h_grid)
+  Grid <- rating_curve_h_grid %>%
+    dplyr::mutate(Elevation = h)%>%
+    dplyr::mutate(CMS_lower = lower)%>%
+    dplyr::mutate(CMS_median = median)%>%
+    dplyr::mutate(CMS_upper = upper)%>%
+    dplyr::mutate(CFS_lower = lower*35.31468492103444)%>%
+    dplyr::mutate(CFS_median = median*35.31468492103444)%>%
+    dplyr::mutate(CFS_upper = upper*35.31468492103444)%>%
+    dplyr::select(Elevation,CMS_lower,CMS_median,CMS_upper,CFS_lower,CFS_median,CFS_upper)
   return(Grid)
 }
+
 
 #' Find Discharge for a Given Stage Elevation
 #'
@@ -110,7 +118,7 @@ GenerateEquallySpacedStageDischarge <- function(sitename, ElevIncrement = 0.001)
 #' @return A data frame row or similar structure containing the discharge information at the specified elevation.
 #' @examples
 #' \dontrun{
-#'   discharge_info <- find_Q_from_WSE('2201R', grid, 400.002) # Assumes '2201R' is a valid site and grid is defined
+#'   discharge_info <- find_Q_from_WSE('2201R', grid, 400.002)
 #' }
 #' @export
 find_Q_from_WSE <- function(Sitename, Grid, Elevation){
@@ -119,12 +127,15 @@ find_Q_from_WSE <- function(Sitename, Grid, Elevation){
   # check if Elevation is Valid
   Elevation_range <- findSiteElevation(Sitename)
   if(Elevation >= Elevation_range[1] & Elevation <= Elevation_range[2]) {
-    print(paste0("valid elevation for site:", sitename))
+    print(paste0("valid elevation for site:", Sitename))
   }else{
     stop(paste0(Elevation, " Not in Range: ", Elevation_range[1], '-to:', Elevation_range[2]))
   }
   G_i <- which.min(abs(Grid$Elevation - Elevation))
+  print(G_i)
   dat <- Grid[G_i,]
   return(dat)
 
 }
+
+

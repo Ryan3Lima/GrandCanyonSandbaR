@@ -14,6 +14,4 @@
 #'   \item{\code{LagIntercept}}{List of intercepts from lagtime analysis.}
 #' }
 #' @source Data imported from Google Sheets.
-#' @name GageList
-#' @docType data
 "GageList"

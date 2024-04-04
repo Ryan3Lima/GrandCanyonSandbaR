@@ -16,7 +16,7 @@ None; this function stops execution with an error message if the site name is in
 Checks if the provided site name is valid by verifying its presence in the \code{SandbarSites} dataset.
 }
 \examples{
-\dontrun{
-  validSite("0034L") # Assumes "0034L" is a valid site in SandbarSites
-}
+
+validSite("0034L") # Assumes "0034L" is a valid site in SandbarSites
+
 }

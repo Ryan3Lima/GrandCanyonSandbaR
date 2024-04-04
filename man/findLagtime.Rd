@@ -28,9 +28,5 @@ of intermediate results, including the selected river mile, nearest gage name, d
 miles, and the calculated lag hours.
 }
 \examples{
-\dontrun{
-  out <- findLagtime(rivermile = 32.9, message = TRUE)
-  print(out)
-}
-
+out <- findLagtime(rivermile = 32.9, message = TRUE)
 }

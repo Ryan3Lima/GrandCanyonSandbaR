@@ -16,11 +16,7 @@
 #'   - `nearest_gage_index`: The index of the nearest gage within the `GageList` dataframe.
 #'
 #' @examples
-#' \dontrun{
-#'   out <- findLagtime(rivermile = 32.9, message = TRUE)
-#'   print(out)
-#' }
-#'
+#' out <- findLagtime(rivermile = 32.9, message = TRUE)
 #' @importFrom lubridate duration
 #' @export
 findLagtime <- function(rivermile, message = F) {

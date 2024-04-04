@@ -17,16 +17,13 @@
 #' @return An interactive hydrograph plot rendered using `dygraphs`.
 #'
 #' @examples
-#' \dontrun{
-#' data("SampleQ_xts_cfs")
 #' plotInteractiveHydrograph(Qdat = SampleQ_xts_cfs,
 #'   title= "Colorado River Discharge at Lees Ferry",
 #'   subtitle = "October 3rd 2014 - October 11th 2014")
-#' }
+#'
 #'
 #' @importFrom dygraphs dygraph dyAxis dyOptions dyRangeSelector
 #' @export
-#' @rdname plotInteractiveHydrograph
 plotInteractiveHydrograph <- function(Qdat,title = "Hydrograph", subtitle = "subtitle", unit = 'cfs'){
   fullTitle <- paste(title, "<br>", "<small>", subtitle, "</small>")
   if (unit == 'cfs'){
