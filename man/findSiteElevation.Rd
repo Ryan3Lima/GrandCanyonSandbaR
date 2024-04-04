@@ -16,6 +16,6 @@ A numeric vector with two elements: the minimum and maximum elevation.
 Determines the minimum and maximum stage (elevation) recorded at a specified sandbar site.
 }
 \examples{
-elevation_range <- findSiteElevation('2023R') # Assumes '2023R' is a valid site in SandbarSites
+elevation_range <- findSiteElevation('2023R')
 
 }

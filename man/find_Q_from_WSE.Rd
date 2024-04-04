@@ -21,6 +21,6 @@ Determines the discharge at a specified stage elevation using a provided stage-d
 }
 \examples{
 \dontrun{
-  discharge_info <- find_Q_from_WSE('2201R', grid, 400.002) # Assumes '2201R' is a valid site and grid is defined
+  discharge_info <- find_Q_from_WSE('2201R', grid, 400.002)
 }
 }

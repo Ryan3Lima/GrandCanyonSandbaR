@@ -136,3 +136,45 @@ convert_to_xts <- function(data, column_choice = "Discharge_cfs" ) {
 }
 
 
+#' Print Colored Messages to the Console
+#'
+#' This function prints messages to the R console with specified ANSI colors.
+#' It's designed to help distinguish different types of messages (e.g., success, info, warning)
+#' by color, making them more visually distinguishable.
+#'
+#' @param text The message text to be printed.
+#' @param color A string specifying the color of the text. Supported colors include "green", "blue", and "red".
+#' Default is "green".
+#'
+#' @details The function uses ANSI color codes to set the color of the text.
+#' These codes are widely supported in modern terminals and R consoles, including RStudio.
+#' However, some environments, particularly older Windows command lines, might not display
+#' ANSI colors correctly. In such cases, the text will be printed without coloring.
+#'
+#' @examples
+#' \dontrun{
+#' printColored("Success message", "green")
+#' printColored("Information message", "blue")
+#' printColored("Error message", "red")
+#' }
+#'
+#' @note While ANSI color codes are supported in many environments,
+#' there's variability in support and appearance across different platforms and terminals.
+#' Test the function in your target environment to ensure it works as expected.
+#' Additionally, consider providing an option in your functions or scripts to disable colored output
+#' for better compatibility across all environments.
+#'
+#' @export
+printColored <- function(text, color = "green") {
+  colors <- list(
+    green = "\033[32m",
+    blue = "\033[34m",
+    red = "\033[31m",
+    reset = "\033[0m"
+  )
+
+  color_code <- colors[[color]]
+  reset_code <- colors$reset
+
+  message(paste0(color_code, text, reset_code))
+}

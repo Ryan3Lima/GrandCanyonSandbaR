@@ -19,6 +19,6 @@ Generates a grid of equally spaced stage values and their corresponding discharg
 }
 \examples{
 \dontrun{
-  grid <- GenerateEquallySpacedStageDischarge('2201R') # Assumes '2201R' is a valid site in SandbarSites
+  grid <- GenerateEquallySpacedStageDischarge('2201R')
 }
 }

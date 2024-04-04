@@ -19,7 +19,7 @@ validSite <- function(sitename){
   if(!sitename %in% SandbarSites) {
     stop("Invalid sitename")
   }
-  message("Valid sitename")
+  printColored("Valid sitename",'green')
 }
 
 #' Fit Generalized Power Law Model
@@ -38,11 +38,12 @@ fitGeneralizedPowerLawModel <- function(sitename){
   index <- which(SandbarSites == sitename)
   df <- StageDischargeData[[index]]
   df <- as.data.frame(df)
-  message('Using Package bdrc -- Bayesian Discharge Rating Curve')
-  message(paste0("Using bdrc::gplm.fit to fit a generalized power law model for stage-discharge at: ", sitename, ' Sandbar'))
-  message("This may take a few moments")
+  printColored('Using Package bdrc -- Bayesian Discharge Rating Curve', 'blue')
+  m <- paste0("Using bdrc::gplm.fit to fit a generalized power law model for stage-discharge at: ", sitename, ' Sandbar')
+  printColored(m,'blue')
+  printColored("This may take a few moments",'blue')
   gplm.fit <- bdrc::gplm(Q ~ W, data = df, parallel = TRUE, num_cores = 2)
-  message("Plotting Rating Curve")
+  printColored("Plotting Rating Curve",'green')
   graphics::plot(gplm.fit)
   return(gplm.fit)
 }
@@ -64,8 +65,10 @@ findSiteElevation <- function(sitename){
   df <- as.data.frame(df)
   min_elevation <- round(min(df$W), 3)
   max_elevation <- round(max(df$W), 3)
-  message(paste0("Minimum SD Elevation for site:", sitename, " = ", min_elevation))
-  message(paste0("Maximum SD Elevation for site:", sitename, " = ", max_elevation))
+  m1<-paste0("Minimum SD Elevation for site:", sitename, " = ", min_elevation)
+  m2 <-paste0("Maximum SD Elevation for site:", sitename, " = ", max_elevation)
+  printColored(m1,'blue')
+  printColored(m2,'blue')
   elevation_range <- c(min_elevation, max_elevation)
   return(elevation_range)
 }
@@ -88,11 +91,13 @@ GenerateEquallySpacedStageDischarge <- function(sitename, ElevIncrement = 0.001)
   df <- StageDischargeData[[index]]
   df <- as.data.frame(df)
   min_elevation <- round(min(df$W), 3)
-  max_elevation <- round(max(df$W), 3)
+  max_elevation <- round(max(df$W), 4)
   model <- fitGeneralizedPowerLawModel(sitename)
-  message('Generating equally spaced grid of elevations')
-  message(paste0("from: ", min_elevation, " Meters to: ", max_elevation, " Meters"))
-  message(paste0("increments of: ", ElevIncrement, " Meters"))
+  printColored('Generating equally spaced grid of elevations','green')
+  m<-paste0("from: ", min_elevation, " Meters to: ", max_elevation, " Meters")
+  printColored(m,'blue')
+  m1<-paste0("increments of: ", ElevIncrement, " Meters")
+  printColored(m1,'blue')
   h_grid <- seq(min_elevation, max_elevation, by = ElevIncrement)
   rating_curve_h_grid <- predict(model,newdata=h_grid)
   Grid <- rating_curve_h_grid %>%
