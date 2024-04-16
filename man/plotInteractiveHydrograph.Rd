@@ -8,7 +8,7 @@ plotInteractiveHydrograph(
   Qdat,
   title = "Hydrograph",
   subtitle = "subtitle",
-  unit = "cfs"
+  unit = "CFS"
 )
 }
 \arguments{
@@ -21,8 +21,8 @@ data to be plotted.}
 the date range or other descriptive information. Default is "subtitle".}
 
 \item{unit}{A character string specifying the unit of the discharge data. Supported
-units are 'cfs' for cubic feet per second and 'cms' for cubic meters per second.
-Default is 'cfs'.}
+units are 'CFS' for cubic feet per second and 'CMS' for cubic meters per second.
+Default is 'CFS'.}
 }
 \value{
 An interactive hydrograph plot rendered using \code{dygraphs}.
@@ -30,8 +30,8 @@ An interactive hydrograph plot rendered using \code{dygraphs}.
 \description{
 Creates an interactive hydrograph using the \code{dygraphs} package. This function
 is designed to plot time series data of water discharge, allowing for the
-specification of units in cubic feet per second (cfs) or cubic meters per second
-(cms). Additional parameters allow for customization of the plot title and subtitle.
+specification of units in cubic feet per second (CFS) or cubic meters per second
+(CMS). Additional parameters allow for customization of the plot title and subtitle.
 }
 \examples{
 plotInteractiveHydrograph(Qdat = SampleQ_xts_cfs,

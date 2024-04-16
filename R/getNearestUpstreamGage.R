@@ -29,8 +29,10 @@ getNearestUpstreamGage <- function(riverMile, messages = F) {
   nearestUpstreamGageIndex <- max(validIndices)
   # messages if desired
   if(messages == TRUE){
-  message(paste0("The Nearest Upstream Gage to riverMile:", riverMile, " is: ",GageList$GageNameStr[nearestUpstreamGageIndex], ' -- at riverMile: ',nearestUpstreamGage  ))
-  message(paste0("Returning index for nearest upstream gage in data frame: GageList:", nearestUpstreamGageIndex))}
+  m1 <-paste0("The Nearest Upstream Gage to riverMile:", riverMile, " is: ",GageList$GageNameStr[nearestUpstreamGageIndex], ' -- at riverMile: ',nearestUpstreamGage  )
+  printColored(m1,'blue')
+  m2 <-paste0("Returning index for nearest upstream gage in data frame: GageList:", nearestUpstreamGageIndex)
+  printColored(m2,'blue')}
   return(nearestUpstreamGageIndex)
 }
 

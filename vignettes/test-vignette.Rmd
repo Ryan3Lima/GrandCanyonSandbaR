@@ -20,7 +20,7 @@ library(GrandCanyonSandbaR)
 ```
 
 ### Find the Nearest Upstream Gage to any riverMile
-This function is critical in caluclating the lag time, or the time it takes flow to travel from
+This function is critical in calculating the lag time, or the time it takes flow to travel from
 the nearest upstream gage to the location of your sandbar site
 ```{r}
 
@@ -60,14 +60,25 @@ model <- fitGeneralizedPowerLawModel('0307R') # Assumes '0307R' is a valid site 
 
 ```
 
-### Next we will estimate discharge at a specified site using the stage discharge model
+### Next we will estimate run the stage discharge model and create a grid of stage - discharge values
 we do this by generating a grid of equally spaced elevation increments and applying the model
-to calculate the likely discharge with lower and upper bounds for discharge in CFS and CMS
+
 
 ```{r}
 
 
 grid <- GenerateEquallySpacedStageDischarge(sitename = '2201R') # Assumes '2201R' is a valid site in SandbarSites
-discharge_info <- find_Q_from_WSE('2201R', grid, 400.002) # Assumes '2201R' is a valid site and grid is defined
-print(discharge_info)
+
+```
+### Get a discharge value at a site, given a water surface elevation
+```{r}
+# select a site
+site = SandbarSites[38] # site '2201R'
+# select a water surface elevation 
+WSE = 395.002 # 400.002 Meters in AZ state plane central
+
+# get the estimated discharge in CFS
+dat <- findQfromWSE(Sitename = site,Elevation = WSE, Unit = 'CFS')
+dat$CFS_median
+
 ```

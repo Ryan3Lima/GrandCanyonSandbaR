@@ -113,34 +113,6 @@ GenerateEquallySpacedStageDischarge <- function(sitename, ElevIncrement = 0.001)
 }
 
 
-#' Find Discharge for a Given Stage Elevation
-#'
-#' Determines the discharge at a specified stage elevation using a provided stage-discharge grid.
-#'
-#' @param Sitename The name of the site.
-#' @param Grid A data frame or list containing the stage-discharge grid.
-#' @param Elevation The elevation for which to find the corresponding discharge.
-#' @return A data frame row or similar structure containing the discharge information at the specified elevation.
-#' @examples
-#' \dontrun{
-#'   discharge_info <- find_Q_from_WSE('2201R', grid, 400.002)
-#' }
-#' @export
-find_Q_from_WSE <- function(Sitename, Grid, Elevation){
-  # check if sitename valid
-  validSite(Sitename)
-  # check if Elevation is Valid
-  Elevation_range <- findSiteElevation(Sitename)
-  if(Elevation >= Elevation_range[1] & Elevation <= Elevation_range[2]) {
-    print(paste0("valid elevation for site:", Sitename))
-  }else{
-    stop(paste0(Elevation, " Not in Range: ", Elevation_range[1], '-to:', Elevation_range[2]))
-  }
-  G_i <- which.min(abs(Grid$Elevation - Elevation))
-  print(G_i)
-  dat <- Grid[G_i,]
-  return(dat)
 
-}
 
 
