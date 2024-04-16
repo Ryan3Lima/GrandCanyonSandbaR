@@ -12,30 +12,29 @@ plotStaticHydrograph(
 )
 }
 \arguments{
-\item{Qdat}{A dataframe containing the discharge data to be plotted, expected to include
-a POSIXct dateTime column, and numeric Discharge_cfs and Discharge_cms columns.}
+\item{Qdat}{A dataframe containing the discharge data to be plotted.
+It must include a POSIXct \code{dateTime} column, and numeric \code{Discharge_cfs}
+and \code{Discharge_cms} columns.}
 
-\item{title}{The main title of the hydrograph plot. Default is "Hydrograph".}
+\item{title}{The main title of the hydrograph plot.
+Default is "Hydrograph".}
 
 \item{subtitle}{The subtitle of the hydrograph plot, typically used for specifying
-the date range or other descriptive information. Default is "Enter subtitle here".}
+the date range or other descriptive information.
+Default is "Enter subtitle here".}
 
-\item{unit}{A character string specifying the unit of the discharge data. Supported
-units are 'CFS' for cubic feet per second and 'CMS' for cubic meters per second.
+\item{unit}{The unit of discharge data to be displayed.
+Valid options are 'CFS' for cubic feet per second and 'CMS' for cubic meters per second.
 Default is 'CFS'.}
 }
 \value{
 A ggplot object representing the hydrograph.
 }
 \description{
-Creates a static hydrograph using the \code{ggplot2} package. This function
-is designed to plot time series data of water discharge in either cubic feet per second (CFS)
-or cubic meters per second (CMS), with additional parameters to customize the plot title and subtitle.
+This function creates a static hydrograph using the ggplot2 package, allowing for
+the visualization of water discharge over time in either cubic feet per second (CFS)
+or cubic meters per second (CMS). The plot includes options to customize the title and subtitle.
 }
 \examples{
-plotStaticHydrograph(Qdat = SampleQ_1week_processed,
-  title= "Colorado River Discharge at Lees Ferry",
-  subtitle = "October 3rd 2014 - October 11th 2014",
-  unit = 'CFS')
-
+plotStaticHydrograph(SampleQ_1week_processed, title = "Sample Hydrograph", subtitle = "Sample Data", unit = 'CFS')
 }

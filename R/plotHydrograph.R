@@ -1,3 +1,7 @@
+# Load necessary libraries
+library(ggplot2)
+library(dygraphs)
+library(rlang)
 #' Plot an Interactive Hydrograph
 #'
 #' Creates an interactive hydrograph using the `dygraphs` package. This function
@@ -41,31 +45,31 @@ plotInteractiveHydrograph <- function(Qdat,title = "Hydrograph", subtitle = "sub
 
 #' Plot a Static Hydrograph
 #'
-#' Creates a static hydrograph using the `ggplot2` package. This function
-#' is designed to plot time series data of water discharge in either cubic feet per second (CFS)
-#' or cubic meters per second (CMS), with additional parameters to customize the plot title and subtitle.
+#' This function creates a static hydrograph using the ggplot2 package, allowing for
+#' the visualization of water discharge over time in either cubic feet per second (CFS)
+#' or cubic meters per second (CMS). The plot includes options to customize the title and subtitle.
 #'
-#' @param Qdat A dataframe containing the discharge data to be plotted, expected to include
-#'   a POSIXct dateTime column, and numeric Discharge_cfs and Discharge_cms columns.
-#' @param title The main title of the hydrograph plot. Default is "Hydrograph".
+#' @param Qdat A dataframe containing the discharge data to be plotted.
+#'             It must include a POSIXct `dateTime` column, and numeric `Discharge_cfs`
+#'             and `Discharge_cms` columns.
+#' @param title The main title of the hydrograph plot.
+#'              Default is "Hydrograph".
 #' @param subtitle The subtitle of the hydrograph plot, typically used for specifying
-#' the date range or other descriptive information. Default is "Enter subtitle here".
-#' @param unit A character string specifying the unit of the discharge data. Supported
-#' units are 'CFS' for cubic feet per second and 'CMS' for cubic meters per second.
-#' Default is 'CFS'.
+#'                 the date range or other descriptive information.
+#'                 Default is "Enter subtitle here".
+#' @param unit The unit of discharge data to be displayed.
+#'             Valid options are 'CFS' for cubic feet per second and 'CMS' for cubic meters per second.
+#'             Default is 'CFS'.
 #'
 #' @return A ggplot object representing the hydrograph.
-#'
-#' @examples
-#' plotStaticHydrograph(Qdat = SampleQ_1week_processed,
-#'   title= "Colorado River Discharge at Lees Ferry",
-#'   subtitle = "October 3rd 2014 - October 11th 2014",
-#'   unit = 'CFS')
-#'
+#' @import ggplot2
+#' @import rlang
 #' @importFrom ggplot2 ggplot aes geom_line labs theme_minimal
 #' @export
+#'
+#' @examples
+#' plotStaticHydrograph(SampleQ_1week_processed, title = "Sample Hydrograph", subtitle = "Sample Data", unit = 'CFS')
 plotStaticHydrograph <- function(Qdat, title = "Hydrograph", subtitle = "Enter subtitle here", unit = 'CFS') {
-  library(ggplot2)
 
   # Select the appropriate discharge column based on the specified unit
   if (unit == 'CFS') {
@@ -78,14 +82,19 @@ plotStaticHydrograph <- function(Qdat, title = "Hydrograph", subtitle = "Enter s
     stop("Invalid unit specified. Choose either 'CFS' or 'CMS'")
   }
 
-  # Create the plot
-  p <- ggplot(Qdat, aes(x = dateTime, y = Qdat[[discharge_col]])) +
-    geom_line() +  # Draw the line
-    labs(title = title, subtitle = subtitle, y = ylab, x = "Time") +
-    theme_minimal()  # Apply a minimalistic theme
+  # Convert the column name string to a symbol
+  discharge_col_sym <- sym(discharge_col)
+
+  # Create the plot using tidy evaluation
+  p <- ggplot2::ggplot(Qdat, aes(x = dateTime, y = !!discharge_col_sym)) +
+    ggplot2::geom_line() +  # Draw the line
+    ggplot2::labs(title = title, subtitle = subtitle, y = ylab, x = "Time") +
+    ggplot2::theme_minimal()  # Apply a minimalistic theme
 
   return(p)
 }
+
+
 
 
 #' Plot a Flow Duration Curve
@@ -130,10 +139,10 @@ plotFlowDurationCurve <- function(Qdat, unit = 'CFS', title = "Flow Duration Cur
   fdc_data <- data.frame(ExceedanceProbability = exceedance_probability, Discharge = sorted_discharge)
 
   # Plotting the flow duration curve
-  p <- ggplot(fdc_data, aes(x = ExceedanceProbability, y = Discharge)) +
-    geom_line() +  # Draw the line
-    labs(title = title, x = "Exceedance Probability (%)", y = sprintf("Discharge (%s)", unit)) +
-    theme_minimal()  # Apply a minimalistic theme
+  p <- ggplot2::ggplot(fdc_data, aes(x = ExceedanceProbability, y = Discharge)) +
+    ggplot2::geom_line() +  # Draw the line
+    ggplot2::labs(title = title, x = "Exceedance Probability (%)", y = sprintf("Discharge (%s)", unit)) +
+    ggplot2::theme_minimal()  # Apply a minimalistic theme
 
   return(p)
 }

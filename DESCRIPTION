@@ -18,7 +18,9 @@ Imports:
     magrittr,
     xts,
     lubridate,
-    bdrc
+    bdrc,
+    ggplot2,
+    rlang
 Suggests: 
     knitr,
     rmarkdown,
