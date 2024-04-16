@@ -46,6 +46,9 @@
     <loc>/reference/StageDischargeData.html</loc>
   </url>
   <url>
+    <loc>/reference/StageDischargeGrids.html</loc>
+  </url>
+  <url>
     <loc>/reference/cfs2cms.html</loc>
   </url>
   <url>
@@ -61,10 +64,10 @@
     <loc>/reference/findLagtime.html</loc>
   </url>
   <url>
-    <loc>/reference/findSiteElevation.html</loc>
+    <loc>/reference/findQfromWSE.html</loc>
   </url>
   <url>
-    <loc>/reference/find_Q_from_WSE.html</loc>
+    <loc>/reference/findSiteElevation.html</loc>
   </url>
   <url>
     <loc>/reference/fitGeneralizedPowerLawModel.html</loc>
@@ -76,7 +79,13 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/plotFlowDurationCurve.html</loc>
+  </url>
+  <url>
     <loc>/reference/plotInteractiveHydrograph.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plotStaticHydrograph.html</loc>
   </url>
   <url>
     <loc>/reference/printColored.html</loc>
