@@ -1,99 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/test-vignette.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/GageList.html</loc>
-  </url>
-  <url>
-    <loc>/reference/GenerateEquallySpacedStageDischarge.html</loc>
-  </url>
-  <url>
-    <loc>/reference/SampleQ_1week_processed.html</loc>
-  </url>
-  <url>
-    <loc>/reference/SampleQ_1week_raw.html</loc>
-  </url>
-  <url>
-    <loc>/reference/SampleQ_xts_cfs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/SampleQ_xts_cms.html</loc>
-  </url>
-  <url>
-    <loc>/reference/SandbarSites.html</loc>
-  </url>
-  <url>
-    <loc>/reference/StageDischargeData.html</loc>
-  </url>
-  <url>
-    <loc>/reference/StageDischargeGrids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cfs2cms.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cms2cfs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convertQdataRaw2FormattedQ.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_to_xts.html</loc>
-  </url>
-  <url>
-    <loc>/reference/findLagtime.html</loc>
-  </url>
-  <url>
-    <loc>/reference/findQfromWSE.html</loc>
-  </url>
-  <url>
-    <loc>/reference/findSiteElevation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fitGeneralizedPowerLawModel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getNearestUpstreamGage.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotFlowDurationCurve.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotInteractiveHydrograph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotStaticHydrograph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/printColored.html</loc>
-  </url>
-  <url>
-    <loc>/reference/subsetDatetime.html</loc>
-  </url>
-  <url>
-    <loc>/reference/validSite.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/test-vignette.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/GageList.html</loc></url>
+<url><loc>/reference/GenerateEquallySpacedStageDischarge.html</loc></url>
+<url><loc>/reference/SampleQ_1week_processed.html</loc></url>
+<url><loc>/reference/SampleQ_1week_raw.html</loc></url>
+<url><loc>/reference/SampleQ_xts_cfs.html</loc></url>
+<url><loc>/reference/SampleQ_xts_cms.html</loc></url>
+<url><loc>/reference/SandbarSites.html</loc></url>
+<url><loc>/reference/StageDischargeData.html</loc></url>
+<url><loc>/reference/StageDischargeGrids.html</loc></url>
+<url><loc>/reference/cfs2cms.html</loc></url>
+<url><loc>/reference/cms2cfs.html</loc></url>
+<url><loc>/reference/convertQdataRaw2FormattedQ.html</loc></url>
+<url><loc>/reference/convert_to_xts.html</loc></url>
+<url><loc>/reference/findLagtime.html</loc></url>
+<url><loc>/reference/findQfromWSE.html</loc></url>
+<url><loc>/reference/findSiteElevation.html</loc></url>
+<url><loc>/reference/fitGeneralizedPowerLawModel.html</loc></url>
+<url><loc>/reference/getNearestUpstreamGage.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/plotFlowDurationCurve.html</loc></url>
+<url><loc>/reference/plotInteractiveHydrograph.html</loc></url>
+<url><loc>/reference/plotStaticHydrograph.html</loc></url>
+<url><loc>/reference/printColored.html</loc></url>
+<url><loc>/reference/subsetDatetime.html</loc></url>
+<url><loc>/reference/validSite.html</loc></url>
 </urlset>
+
